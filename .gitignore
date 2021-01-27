@@ -22,7 +22,7 @@ package-lock.json
 
 # added by me
 config
-services/awsConfig.js
+# services/awsConfig.js
 
 # Coveralls
 coverage
