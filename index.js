@@ -4,6 +4,7 @@ const logger = require("morgan")
 const catRouter = require("./routers/catRouter")
 const helmet = require('helmet')
 const hpp = require('hpp');
+var cors = require('cors')
 
 if(process.env.NODE_ENV == "production"){
   app.use(logger("combined"))
@@ -12,6 +13,9 @@ if(process.env.NODE_ENV == "production"){
 }else{
   app.use(logger("dev"))
 }
+
+
+app.use(cors())
 
 // UGLY CODE.. 코드를 아래와 같이 작성한 것을.. 후회하는 중...!
 app.use("/api", catRouter)
