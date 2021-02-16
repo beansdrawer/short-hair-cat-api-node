@@ -19,7 +19,12 @@ router.get("/breeds/image/random", (req, res) => {
 // a number of random cat image by any breed
 router.get("/breeds/image/random/:number", (req, res) => {
   const { number } = req.params
-  if(!Number.isInteger(Number.parseFloat(number))) res.redirect(`/api/breeds/image/random/`)
+  if(!Number.isInteger(Number.parseFloat(number))) res.redirect(`/api/breeds/image/random`)
+
+  if(Number.parseInt(number) > 10) {
+    res.redirect(`/api/breeds/image/random`)
+    return;
+  }
 
   imagesAnyBreedWithNumber(Number.parseFloat(number)).then(result => {
     res.json(result)
@@ -41,8 +46,12 @@ router.get("/breed/:breed/random", (req, res) => {
 // a number of random cat image by certain breed
 router.get("/breed/:breed/random/:number", (req, res) => {
   const { breed, number } = req.params
-  if(!Number.isInteger(Number.parseFloat(number))) res.redirect(`/api/breed/${breed}/random/`)
+  if(!Number.isInteger(Number.parseFloat(number))) res.redirect(`/api/breed/${breed}/random`)
 
+  if(Number.parseInt(number) > 3) {
+    res.redirect(`/api/breed/${breed}/random`)
+    return;
+  }
   imagesByBreedWithNumber(breed, Number.parseFloat(number)).then(result => {
     res.json(result)
   }).catch(error => {
